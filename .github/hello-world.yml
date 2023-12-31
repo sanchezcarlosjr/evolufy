@@ -1,8 +1,0 @@
-name: hello-world
-on: push
-jobs:
-  my-first-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Awesome Title
-        run: echo "Hello World!"
