@@ -15,31 +15,69 @@
 > Yet another algotrade framework
 
 Evolufy is a framework designed for the development, deployment, and observability of trading algorithms, featuring options for DataOps/MLOps through open-source tools. It offers simplicity and flexibility, allowing the use of any algorithm, incorporation of any data source, and ensuring easy local deployment without the need for TripleO (OpenStack on OpenStack on OpenStack).
-We have integrated a suite of DataOps to deliver production-ready features:
+```mermaid
+  graph TD;
+      subgraph ETL 
+          subgraph DataSources["Data sources"]
+              APIs["APIs and Events (GraphQL, gRPC, REST, MQTT, WebSockets, Kafka ...)"]
+              Databases
+              Storages
+              Simulation
+              News["News (Videos, HTML, Natural language, RSS)"]
+          end
+          DataSources
+          -->Transformation
+          -->Loading
+          -->DataVersioning["Data versioning"]
+          -->Analytics
+      end
+      DataVersioning
+      -->DataPreparation["Data Preparation / Preprocessing"]
+      -->ExperimentTracking
+      subgraph ExperimentTracking
+          ModelTraining["Model Training"]
+          -->ModelEvaluation["Model Evaluation"]
+          -->ModelArchitecture["Model Architecture"]
+          -->ModelTraining
+      end
+      ExperimentTracking
+      -->ModelVersioning["Model Versioning"]
+      -->ModelDeployment["Model Deployment"]
+     -->Observability
+```
+
+
+We have integrated a suite of DataOps to deliver production-ready features for trading:
 ## Infrastructure
-- Use conda, micrombamba and virtual environment to create a rapid prototype.
-- You likely need a database, a straightforward method for creating dashboards and reports from various data sources, and an easy way to manipulate your data. For these purposes, we provide you with the ```workspace``` Git submodule.
+* Use conda, micrombamba and virtual environment to create a rapid prototype.
+* Environment-agnostic.
+* You likely need a database, a straightforward method for creating dashboards and reports from various data sources, and an easy way to manipulate your data as spreadsheets in your own infrastructure. For these purposes, we provide you with the ```workspace``` Git submodule which includes Supabase, Metabase, MLFlow, Baserow and other useful containers.
 
 ## Workflow Orchestration
 * [Dagster](https://dagster.io/) is an open-source data orchestrator that defines assets through software. It's designed to facilitate the easy creation of data pipelines locally, and it also offers straightforward deployment on Kubernetes.
 This makes it a versatile tool for managing data workflows, particularly in environments where both local development and scalable deployment are important.
 * Strategies can be formulated using a configuration file (Domain-Specific Language) or directly in Python.
 * TODO: Drag & Drop Orchestration
+* TODO: dbt
 ## Asset Tracking and Model Metadata Management Tools
-* Track your experiments and data with dvc and DAGsHub.
+* Track your experiments and data with dvc, MLFlow, and DAGsHub.
+* Collaborate and reproduce your findings.
+* Data versioning.
 ## Experimentation
 * Employ time series analysis.
-* Optimize your investment portfolio with Modern Portfolio Theory.
-* Create another strategy.
+* Optimize Modern Portfolio Theory with different algorithms.
+* Out-of-box different investing strategies.
+* Transparent hyperparameter optimization.
+* Framework-agnostic.
 ## Testing
 * Analyze your strategies with backtesting and traditional machine learning metrics.
 * Utilize typical strategies or build on top of them.
 * Useful notebooks, streamlit, and CLI.
 ## Deployment and Interoperability
-* Utilize Gradio or FastAPI to build microservices based on your models, or deploy them on your own infrastructure using ONNX. 
+* Utilize Gradio or FastAPI to build microservices based on your models, or deploy them on your own infrastructure using ONNX by a Model Registry. 
 * Employ Dagster to develop workflows in your cluster or locally, integrating your data sources and preferred brokers.
 ## Self-hosted web
-- We recommend using Cloudflare Tunnels for self-hosting your web applications.
+* We recommend using Cloudflare Tunnels for self-hosting your web applications.
 
 
 ## Installation
