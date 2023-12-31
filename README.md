@@ -1,9 +1,10 @@
 [![Project generated with PyScaffold](https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold)](https://pyscaffold.org/)
+[![PyPI-Server](https://img.shields.io/pypi/v/evolufy.svg)](https://pypi.org/project/evolufy/)
+
 <!-- These are examples of badges you might also want to add to your README. Update the URLs accordingly.
 [![Built Status](https://api.cirrus-ci.com/github/<USER>/evolufy.svg?branch=main)](https://cirrus-ci.com/github/<USER>/evolufy)
 [![ReadTheDocs](https://readthedocs.org/projects/evolufy/badge/?version=latest)](https://evolufy.readthedocs.io/en/stable/)
 [![Coveralls](https://img.shields.io/coveralls/github/<USER>/evolufy/main.svg)](https://coveralls.io/r/<USER>/evolufy)
-[![PyPI-Server](https://img.shields.io/pypi/v/evolufy.svg)](https://pypi.org/project/evolufy/)
 [![Conda-Forge](https://img.shields.io/conda/vn/conda-forge/evolufy.svg)](https://anaconda.org/conda-forge/evolufy)
 [![Monthly Downloads](https://pepy.tech/badge/evolufy/month)](https://pepy.tech/project/evolufy)
 [![Twitter](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=Twitter)](https://twitter.com/evolufy)
@@ -11,9 +12,35 @@
 
 # evolufy
 
-> Add a short description here!
+> Yet another algotrade framework
 
-A longer description of your project goes here...
+Evolufy is a framework designed for the development, deployment, and observability of trading algorithms, featuring options for DataOps/MLOps through open-source tools. It offers simplicity and flexibility, allowing the use of any algorithm, incorporation of any data source, and ensuring easy local deployment without the need for TripleO (OpenStack on OpenStack on OpenStack).
+We have integrated a suite of DataOps to deliver production-ready features:
+## Infrastructure
+- Use conda, micrombamba and virtual environment to create a rapid prototype.
+- You likely need a database, a straightforward method for creating dashboards and reports from various data sources, and an easy way to manipulate your data. For these purposes, we provide you with the ```workspace``` Git submodule.
+
+## Workflow Orchestration
+* [Dagster](https://dagster.io/) is an open-source data orchestrator that defines assets through software. It's designed to facilitate the easy creation of data pipelines locally, and it also offers straightforward deployment on Kubernetes.
+This makes it a versatile tool for managing data workflows, particularly in environments where both local development and scalable deployment are important.
+* Strategies can be formulated using a configuration file (Domain-Specific Language) or directly in Python.
+* TODO: Drag & Drop Orchestration
+## Asset Tracking and Model Metadata Management Tools
+* Track your experiments and data with dvc and DAGsHub.
+## Experimentation
+* Employ time series analysis.
+* Optimize your investment portfolio with Modern Portfolio Theory.
+* Create another strategy.
+## Testing
+* Analyze your strategies with backtesting and traditional machine learning metrics.
+* Utilize typical strategies or build on top of them.
+* Useful notebooks, streamlit, and CLI.
+## Deployment and Interoperability
+* Utilize Gradio or FastAPI to build microservices based on your models, or deploy them on your own infrastructure using ONNX. 
+* Employ Dagster to develop workflows in your cluster or locally, integrating your data sources and preferred brokers.
+## Self-hosted web
+- We recommend using Cloudflare Tunnels for self-hosting your web applications.
+
 
 ## Installation
 
@@ -49,8 +76,9 @@ Optional and needed only once after `git clone`:
    This is useful to avoid large diffs due to plots in your notebooks.
    A simple `nbstripout --uninstall` will revert these changes.
 
-
+   
 Then take a look into the `scripts` and `notebooks` folders.
+
 
 ## Dependency Management & Reproducibility
 
