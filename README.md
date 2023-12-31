@@ -14,7 +14,7 @@
 
 > Yet another algotrade framework
 
-Evolufy is a framework designed for the development, deployment, and observability of trading algorithms, featuring options for DataOps/MLOps through open-source tools. It offers simplicity and flexibility, allowing the use of any algorithm, incorporation of any data source, and ensuring easy local deployment without the need for TripleO (OpenStack on OpenStack on OpenStack).
+Evolufy is a framework designed for the development, deployment, and observability of trading algorithms, featuring options for DataOps/MLOps through open-source tools. It offers simplicity and flexibility, allowing the use of any algorithm, incorporation of any data source, and ensuring easy local deployment without the need for TripleO (OpenStack on OpenStack on OpenStack) issue.
 ```mermaid
   graph TD;
       subgraph ETL 
@@ -66,7 +66,7 @@ This makes it a versatile tool for managing data workflows, particularly in envi
 ## Experimentation
 * Employ time series analysis.
 * Optimize Modern Portfolio Theory with different algorithms.
-* Out-of-box different investing strategies.
+* Out-of-box different investing strategies such as Value Investing.
 * Transparent hyperparameter optimization.
 * Framework-agnostic.
 ## Testing

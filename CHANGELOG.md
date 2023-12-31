@@ -1,7 +1,9 @@
 # Changelog
 
-## Version 0.1 (development)
+## Version 2.0.0 (development)
 
-- Feature A added
-- FIX: nasty bug #1729 fixed
-- add your changes here!
+- Evolufy changes into a DataOps framework specialized in trading markets.
+
+## Version 1.0.0
+
+- Evolufy was born as library for basic MPT strategies only.
