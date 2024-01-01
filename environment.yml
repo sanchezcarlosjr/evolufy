@@ -50,6 +50,9 @@ dependencies:
 
   # DEVELOPMENT ONLY PACKAGES (could also be kept in a separate environment file)
   - jupyterlab
+  - jupyter
+  - dvc_s3
+  - dvc
   - pytest
   - pytest-cov
   - tox

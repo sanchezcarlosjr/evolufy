@@ -14,7 +14,7 @@
 
 > Yet another algotrade framework
 
-Evolufy is a framework designed for the development, deployment, and observability of trading algorithms, featuring options for DataOps/MLOps through open-source tools. It offers simplicity and flexibility, allowing the use of any algorithm, incorporation of any data source, and ensuring easy local deployment without the need for TripleO (OpenStack on OpenStack on OpenStack) issue.
+Evolufy is a framework designed for the development, deployment, and observability of trading algorithms, featuring options for DataOps/MLOps through open-source tools. It offers simplicity and flexibility, allowing the use of any algorithm, incorporation of any data source, and ensuring easy self-hosting without the need for TripleO (OpenStack on OpenStack on OpenStack) issue.
 ```mermaid
   graph TD;
       subgraph ETL 
@@ -57,12 +57,18 @@ We have integrated a suite of DataOps to deliver production-ready features for t
 * [Dagster](https://dagster.io/) is an open-source data orchestrator that defines assets through software. It's designed to facilitate the easy creation of data pipelines locally, and it also offers straightforward deployment on Kubernetes.
 This makes it a versatile tool for managing data workflows, particularly in environments where both local development and scalable deployment are important.
 * Strategies can be formulated using a configuration file (Domain-Specific Language) or directly in Python.
-* TODO: Drag & Drop Orchestration
+* TODO: Drag & Drop Orchestration with approval mechanisms, chat creator and model selection 
 * TODO: dbt
+
 ## Asset Tracking and Model Metadata Management Tools
 * Experiment tracking and lifecycle management with [MLFlow](https://mlflow.org/).
 * Data Version Control with [DVC](https://dvc.org/).
 * Collaborate and reproduce your findings.
+
+## Datasets and Pretrained Machine Learning models
+We provide two types of datasets and pretrained models: one hosted on [Zenodo](https://zenodo.org/) for research purposes, which offers datasets with DOIs, and another on [DagsHub](https://dagshub.com/sanchezcarlosjr/evolufy), featuring datasets compatible with DVC and MLflow to ensure rapid learning. Also, we save a backup on HuggingFace until we will be able to do so.
+
+
 ## Experimentation
 * Employ time series analysis.
 * Optimize Modern Portfolio Theory with different algorithms.
@@ -73,10 +79,10 @@ This makes it a versatile tool for managing data workflows, particularly in envi
 * Analyze your strategies with backtesting and traditional machine learning metrics.
 * Utilize typical strategies or build on top of them.
 * Useful notebooks, streamlit, and CLI.
-## Deployment and Interoperability
+## Deployment, Sevring and Interoperability
 * TODO: Model Selection and Deployment
-* Utilize Gradio or FastAPI to build microservices based on your models, or deploy them on your own infrastructure using ONNX by a Model Registry.
-* Deploy on some plugin & play machine learning API as Hugging Face.
+* Utilize Gradio, MLFlow, or FastAPI to build microservices based on your models, or deploy them on your own infrastructure using ONNX by a Model Registry.
+* Deploy on some cluster as Hugging Face or Kubernetes.
 * Employ Dagster to develop workflows in your cluster or locally, integrating your data sources and preferred brokers.
 ## Observability
 * TODO: Model Performance Monitoring
@@ -84,7 +90,6 @@ This makes it a versatile tool for managing data workflows, particularly in envi
 * TODO: 
 ## Self-hosted web
 * We recommend using Cloudflare Tunnels for self-hosting your web applications.
-
 
 ## Installation
 
