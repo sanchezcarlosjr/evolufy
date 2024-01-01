@@ -1,0 +1,5 @@
+outs:
+- md5: a6be4a8f86c023427fe7069d0512f148
+  size: 34152
+  hash: md5
+  path: topstories.csv

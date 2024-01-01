@@ -60,9 +60,9 @@ This makes it a versatile tool for managing data workflows, particularly in envi
 * TODO: Drag & Drop Orchestration
 * TODO: dbt
 ## Asset Tracking and Model Metadata Management Tools
-* Track your experiments and data with dvc, MLFlow, and DAGsHub.
+* Experiment tracking and lifecycle management with [MLFlow](https://mlflow.org/).
+* Data Version Control with [DVC](https://dvc.org/).
 * Collaborate and reproduce your findings.
-* Data versioning.
 ## Experimentation
 * Employ time series analysis.
 * Optimize Modern Portfolio Theory with different algorithms.
@@ -74,8 +74,14 @@ This makes it a versatile tool for managing data workflows, particularly in envi
 * Utilize typical strategies or build on top of them.
 * Useful notebooks, streamlit, and CLI.
 ## Deployment and Interoperability
-* Utilize Gradio or FastAPI to build microservices based on your models, or deploy them on your own infrastructure using ONNX by a Model Registry. 
+* TODO: Model Selection and Deployment
+* Utilize Gradio or FastAPI to build microservices based on your models, or deploy them on your own infrastructure using ONNX by a Model Registry.
+* Deploy on some plugin & play machine learning API as Hugging Face.
 * Employ Dagster to develop workflows in your cluster or locally, integrating your data sources and preferred brokers.
+## Observability
+* TODO: Model Performance Monitoring
+## Analytics
+* TODO: 
 ## Self-hosted web
 * We recommend using Cloudflare Tunnels for self-hosting your web applications.
 
