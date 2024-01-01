@@ -129,6 +129,14 @@ Optional and needed only once after `git clone`:
 Then take a look into the `scripts` and `notebooks` folders.
 
 
+## Best practices
+These practices are not mandatory when working with Evolufy, but they can enhance your user experience and improve the performance of your strategy.
+1. You should convert your _structured data_ into a standardized format, such as Apache Parquet, which is optimized for OLAP (Online Analytical Processing) rather than OLTP (Online Transaction Processing). We advise you that serializing your data using Pickle is not a standard practice, but it is a fast way to create prototypes.
+2. The file system should act as the Single Source of Truth because it minimizes the risk of network errors and lowers latency in operations. However, replicating data in other storage systems as needed is advisable. DVC, an open-source tool, facilitates this process and also helps manage metrics and models with MLFlow. Additionally, you can access data from other sources using Dagster's IO Manager, which transparently extracts and saves data, or adopt a more advanced methods using Filesystem in Userspace or HDFS. Finally, libraries such as Pandas and SQLAlchemy offer methods to accomplish these tasks, but they are less transparent and consequently add more boilerplate code.
+3. Software defines assets instead of a series of operations. 
+4. Prefer using ready-to-go containers and MLFlow for tracking over writing your own software with Streamlit. For instance, if you want to observe the market in real-time, consider using Grafana.   
+5. Experiment with notebooks, but ensure they remain usable for integration with Dagster. 
+
 ## Dependency Management & Reproducibility
 
 1. Always keep your abstract (unpinned) dependencies updated in `environment.yml` and eventually

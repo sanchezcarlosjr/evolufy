@@ -1,0 +1,7 @@
+outs:
+- md5: 93bf8d0c43269b9bb51eea622037929d.dir
+  size: 1
+  nfiles: 1
+  hash: md5
+  desc: Data from third party sources.
+  path: external

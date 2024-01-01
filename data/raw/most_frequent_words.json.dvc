@@ -1,5 +1,0 @@
-outs:
-- md5: f3b64f559ae2bbafae920ab7740f5948
-  size: 303
-  hash: md5
-  path: most_frequent_words.json
