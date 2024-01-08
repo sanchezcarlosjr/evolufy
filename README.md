@@ -79,7 +79,7 @@ We provide two types of datasets and pretrained models: one hosted on [Zenodo](h
 * Analyze your strategies with backtesting and traditional machine learning metrics.
 * Utilize typical strategies or build on top of them.
 * Useful notebooks, streamlit, and CLI.
-## Deployment, Sevring and Interoperability
+## Deployment, Serving and Interoperability
 * TODO: Model Selection and Deployment
 * Utilize Gradio, MLFlow, or FastAPI to build microservices based on your models, or deploy them on your own infrastructure using ONNX by a Model Registry.
 * Deploy on some cluster as Hugging Face or Kubernetes.
