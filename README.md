@@ -214,6 +214,8 @@ TradingSim: This is a virtual trading platform focused on simulation and practic
 
 Quantopian
 
+https://www.quantrocket.com/
+
 https://jesse.trade/
 
 ## Note
