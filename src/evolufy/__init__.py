@@ -28,11 +28,3 @@ def setup_logging(loglevel):
     """
     logformat = "[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
     logging.basicConfig(level=loglevel, stream=sys.stdout, format=logformat, datefmt="%Y-%m-%d %H:%M:%S")
-
-
-def pipeline():
-   x = 0
-   def predict():
-      _logger.debug(x)
-      return "Hello "+str(x)
-   return predict

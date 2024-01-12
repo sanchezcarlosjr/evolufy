@@ -1,7 +1,6 @@
 import gradio as gr
-from evolufy import pipeline
 
-predict = pipeline()
+predict = lambda x: x
 
 with gr.Blocks(title="evolufy") as webapp:
     gr.Markdown("# Greetings from evolufy!")

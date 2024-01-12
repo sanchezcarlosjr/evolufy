@@ -1,7 +1,7 @@
 outs:
-- md5: b950990ea6b24e9333a7c4efe7dbbc14.dir
-  size: 3
-  nfiles: 1
+- md5: 1cf30f43398e7509bc77feb8d8cf8418.dir
+  size: 4226938
+  nfiles: 47
   hash: md5
   desc: Intermediate data that has been transformed.
   path: interim

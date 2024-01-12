@@ -1,7 +1,7 @@
 outs:
-- md5: df0436cd6acd4156aa88bc2572759bef.dir
-  size: 65
-  nfiles: 3
+- md5: d751713988987e9331980363e24189ce.dir
+  size: 0
+  nfiles: 0
   hash: md5
   desc: The final, canonical data sets for modeling.
   path: processed

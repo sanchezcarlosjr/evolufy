@@ -4,10 +4,8 @@ __author__ = "sanchezcarlosjr"
 __copyright__ = "sanchezcarlosjr"
 __license__ = "MIT"
 
-
 from evolufy import setup_logging, _logger
-from evolufy.webservice import WebService, serve
-import ray
+from evolufy.webservice import WebService
 
 # ---- CLI ----
 # The functions defined in this section are wrappers around the main Python
@@ -18,6 +16,7 @@ import typer
 from typing import Optional
 
 app = typer.Typer()
+
 
 @app.command()
 def version():
@@ -38,14 +37,14 @@ def run_webservice():
     this command is used to update the service.
     """
     _logger.info("Starting webservice...")
-    ray.init()
-    serve.run(WebService.bind(), route_prefix="/hello")
+
 
 def main(verbose: Optional[int] = typer.Option(0, '--verbose', '-v', count=True,
                                                help="Increase verbosity by augmenting the count of 'v's, and enhance "
                                                     "the total number of messages.")):
-    setup_logging(verbose*10)
+    setup_logging(verbose * 10)
     app()
+
 
 def run():
     app()

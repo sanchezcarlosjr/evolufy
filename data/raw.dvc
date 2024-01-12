@@ -1,7 +1,7 @@
 outs:
-- md5: d751713988987e9331980363e24189ce.dir
-  size: 0
-  nfiles: 0
+- md5: 0a2eab7c7678cb92f0a8114e88adc589.dir
+  size: 195912
+  nfiles: 1
   hash: md5
   desc: The original, immutable data dump.
   path: raw

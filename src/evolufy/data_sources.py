@@ -1,98 +1,69 @@
-import glob
 import os
-import json
-from typing import Tuple
 
 import pandas as pd
-import darts
-from evolufy.information import *
-from dataclasses import dataclass
-import asyncio
-from dacite import from_dict
-import yfinance as yf
-import pathlib
+import yfinance
+from dagster import ConfigurableResource, asset
+
+from evolufy.issuers import MexicanIssuers
 
 
-def read_json(filename):
-    if os.path.exists(filename):
-        with open(filename, 'r') as file:
-            return json.load(file)
-    return {}
+class YahooFinanceResource(ConfigurableResource):
+    # You need at least two tickers
+    tickers: str = str(MexicanIssuers())
+    start: str = '2013-01-01'
+    end: str = None
+    interval: str = '1d'
+    period: str = 'max'
+
+    def download(self) -> pd.DataFrame:
+        return yfinance.download(tickers=self.tickers, start=self.start, end=self.end, period=self.period,
+                                 interval=self.interval)
 
 
-class DataService:
-    async def request(self):
-        try:
-            return await self.fetch()
-        except:
-            return {}
+class Filesystem(ConfigurableResource):
+    ROOT_DIR: str
+
+    def cache(self, path=""):
+        return os.path.join(self.ROOT_DIR, '.cache', path)
 
 
-@dataclass(init=False)
-class DataServices:
-    information: type  # type of AvailableInformation
-    data_services: Tuple[DataService]
+    def app_path(self, path=""):
+        return os.path.join(self.ROOT_DIR, 'src/evolufy', path)
 
-    def __init__(self, information: type, *args: DataService):
-        self.data_services = args
-        self.information = information
+    def __call__(self, path):
+        return self.processed_path(path)
 
-    async def request(self):
-        results = await asyncio.gather(*[ds.request() for ds in self.data_services])
-        acc = {}
-        for result in results:
-            acc.update(result)
-        return from_dict(data_class=self.information, data=acc)
+    def base_path(self, path=""):
+        return os.path.join(self.ROOT_DIR, path)
 
+    def data_path(self, path=""):
+        return os.path.join(self.ROOT_DIR, 'data', path)
 
-# https://site.financialmodelingprep.com/login
-class FinancialAPI(DataService):
-    async def fetch(self):
-        return {'inflation': {'inflation': []}}
+    def processed_path(self, path=""):
+        return os.path.join(self.ROOT_DIR, 'data/processed', path)
 
+    def external_path(self, path=""):
+        return os.path.join(self.ROOT_DIR, 'data/external', path)
 
-class Filesystem(DataService):
-    def __init__(self, *paths):
-        if not paths:
-            paths = ["**/*.json"]
-        self.paths = paths
+    def raw_path(self, path=""):
+        return os.path.join(self.ROOT_DIR, 'data/raw', path)
 
-    async def fetch(self):
-        files = []
-        for path in self.paths:
-            files.extend(glob.glob(path))
-        assets = []
-        for file in files:
-            df = pd.read_json(file).drop(columns=['import']).set_index('date').rename(columns={'price': pathlib.Path(file).stem})
-            if len(df) >= 100:
-                assets.append(df)
-        timeserie = darts.utils.missing_values.fill_missing_values(TimeSeries.from_dataframe(pd.concat(assets).interpolate(), freq='B'), fill='auto', method='pchip')
-        timeserie.with_static_covariates(pd.DataFrame(data={"weight": np.zeros(timeserie.n_components)}))
-        return timeserie
+    def interim_path(self, path=""):
+        return os.path.join(self.ROOT_DIR, 'data/interim', path)
 
 
-class YahooFinance(DataService):
-    def __init__(self, *assets):
-        self.assets = assets
-        self.benchmark = '^MXX'
-
-    async def fetch(self):
-        adj_closes = yf.download([*self.assets, self.benchmark])['Adj Close']
-        adj_closes = adj_closes.dropna()
-        if len(adj_closes) == 1:
-            adj_closes = pd.DataFrame({self.assets[0]: adj_closes})
-        timeserie = darts.utils.missing_values.fill_missing_values(TimeSeries.from_dataframe(adj_closes, freq='B'), fill='auto', method='pchip')
-        timeserie = timeserie.with_static_covariates(pd.DataFrame(data={
-            "weight": np.zeros(timeserie.n_components),
-            "shares": np.zeros(timeserie.n_components)
-        }))
-        return {'assets': timeserie, 'benchmark': self.benchmark}
+@asset(group_name="market_data_source", compute_kind="Market Data source")
+def yahoo_finance_api(yf: YahooFinanceResource) -> pd.DataFrame:
+    """
+       API Docs: https://pypi.org/project/yfinance/
+    """
+    return (yf.download().stack().reset_index().set_index('Date').rename(index=str,
+                                                                         columns={"level_1": "Symbol"}).sort_index())
 
 
-# https://databursatil.com/
-async def fetch():
-    return {'inflation': {'inflation': []}}
-
-
-class DataBursatil(DataService):
-    pass
+@asset(group_name="market_data_source", compute_kind="Market Data source")
+def data_bursatil_api_stocks() -> pd.DataFrame:
+    """
+       TODO
+    """
+    return pd.DataFrame({'x': ['']})
