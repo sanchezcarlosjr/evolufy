@@ -12,9 +12,9 @@
 
 # evolufy
 
-> Yet another algotrade framework
+> Yet another algotrade engine
 
-Evolufy is a framework designed for the development, deployment, and observability of trading algorithms, featuring options for DataOps/MLOps through open-source tools. It offers simplicity and flexibility, allowing the use of any algorithm, incorporation of any data source, and ensuring easy self-hosting without the need for TripleO (OpenStack on OpenStack on OpenStack) issue.
+Evolufy is a engine designed for the development, deployment, and observability of trading algorithms, featuring options for DataOps/MLOps through open-source tools. It offers simplicity and flexibility, allowing the use of any algorithm, incorporation of any data source, and ensuring easy self-hosting without the need for TripleO (OpenStack on OpenStack on OpenStack) issue.
 ```mermaid
   graph TD;
       subgraph ETL 
@@ -192,6 +192,29 @@ These practices are not mandatory when working with Evolufy, but they can enhanc
 ```
 
 <!-- pyscaffold-notes -->
+
+# Alternatives
+Numer.ai: As a crowd-sourced hedge fund, Numer.ai does not typically offer self-hosting capabilities. It operates on a unique model where users submit predictive models to the platform.
+
+QuantConnect: This platform is open-source and allows users to run their algorithms on their own infrastructure, providing an opportunity for self-hosting.
+
+AlgoTrader: AlgoTrader is designed for institutional and professional traders and offers a software solution that can be self-hosted.
+
+TradingView: Primarily a web-based platform for charting and analysis, TradingView does not offer a traditional self-hosting option.
+
+Backtrader: Being an open-source Python framework, Backtrader can be run on the user's own machine or server, allowing for self-hosting.
+
+Quantiacs: This platform primarily focuses on providing a marketplace for trading algorithms and does not typically offer self-hosting capabilities.
+
+Empirica: As a white-label platform, Empirica might offer some level of customization and self-hosting, depending on the specific requirements and arrangements.
+
+Catalyst: As a Python library, Catalyst can be run locally, allowing users to self-host their trading algorithms.
+
+TradingSim: This is a virtual trading platform focused on simulation and practice, and does not typically offer self-hosting.
+
+Quantopian
+
+https://jesse.trade/
 
 ## Note
 
