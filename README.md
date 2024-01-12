@@ -218,6 +218,8 @@ https://www.quantrocket.com/
 
 https://jesse.trade/
 
+https://www.lean.io/cli/
+
 ## Note
 
 This project has been set up using [PyScaffold] 4.5 and the [dsproject extension] 0.0.post158+g5fb5c40.d20231203.
