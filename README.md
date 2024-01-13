@@ -74,7 +74,7 @@ We provide two types of datasets and pretrained models: one hosted on [Zenodo](h
 * Optimize Modern Portfolio Theory with different algorithms.
 * Out-of-box different investing strategies such as Value Investing.
 * Transparent hyperparameter optimization.
-* Framework-agnostic.
+* Quantopian libraries instead of ad hoc libraries.
 ## Testing
 * Analyze your strategies with backtesting and traditional machine learning metrics.
 * Utilize typical strategies or build on top of them.
