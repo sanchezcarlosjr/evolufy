@@ -46,7 +46,7 @@ Evolufy is a engine designed for the development, deployment, and observability 
       ExperimentTracking
       -->ModelVersioning["Model Versioning"]
       -->ModelDeployment["Model Deployment"]
-     -->ETL
+     -->DataSources
 ```
 
 
