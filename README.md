@@ -15,6 +15,23 @@
 > Yet another algotrade engine
 
 Evolufy is a engine designed for the development, deployment, and observability of trading algorithms, featuring options for DataOps/MLOps through open-source tools. It offers simplicity and flexibility, allowing the use of any algorithm, incorporation of any data source, and ensuring easy self-hosting without the need for TripleO (OpenStack on OpenStack on OpenStack) issue.
+
+# Basic Installation
+1. Install python
+```
+pip install evolufy
+```
+2. Run dagster
+```
+evolufy start-dagster
+```
+4. Run your algorithm
+```
+evolufy run abc.py
+```
+
+
+We have integrated a suite of DataOps to deliver production-ready features for trading:
 ```mermaid
   graph TD;
       subgraph ETL 
@@ -48,22 +65,7 @@ Evolufy is a engine designed for the development, deployment, and observability 
       -->ModelDeployment["Model Deployment"]
      -->DataSources
 ```
-# Basic Installation
-1. Install python
-```
-pip install evolufy
-```
-2. Run dagster
-```
-evolufy start-dagster
-```
-4. Run your algorithm
-```
-evolufy run abc.py
-```
 
-
-We have integrated a suite of DataOps to deliver production-ready features for trading:
 ## Infrastructure
 * Use conda, micrombamba and virtual environment to create a rapid prototype.
 * Environment-agnostic.
