@@ -80,7 +80,7 @@ We provide two types of datasets and pretrained models: one hosted on [Zenodo](h
 * Utilize typical strategies or build on top of them.
 * Useful notebooks, streamlit, and CLI.
 ## Deployment, Serving and Interoperability
-* TODO: Model Selection and Deployment
+* Transparent Model Selection
 * Utilize Gradio, MLFlow, or FastAPI to build microservices based on your models, or deploy them on your own infrastructure using ONNX by a Model Registry.
 * Deploy on some cluster as Hugging Face or Kubernetes.
 * Employ Dagster to develop workflows in your cluster or locally, integrating your data sources and preferred brokers.
