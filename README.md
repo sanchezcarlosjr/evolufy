@@ -48,6 +48,19 @@ Evolufy is a engine designed for the development, deployment, and observability 
       -->ModelDeployment["Model Deployment"]
      -->DataSources
 ```
+# Basic Installation
+1. Install python
+```
+pip install evolufy
+```
+2. Run dagster
+```
+evolufy start-dagster
+```
+4. Run your algorithm
+```
+evolufy run abc.py
+```
 
 
 We have integrated a suite of DataOps to deliver production-ready features for trading:
