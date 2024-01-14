@@ -21,12 +21,42 @@ class YahooFinanceResource(ConfigurableResource):
                                  interval=self.interval)
 
 
-class Filesystem(ConfigurableResource):
-    ROOT_DIR: str
+from functools import wraps
 
-    def mkdir(self, path):
-        Path(path).mkdir(parents=True, exist_ok=True)
-        return self
+
+def recursive_mkdir(path):
+    try:
+        Path(os.path.dirname(path)).mkdir(parents=True, exist_ok=True)
+    except FileExistsError:
+        pass
+    return path
+
+
+def ensure_valid_path(func):
+    @wraps(func)
+    def wrapper(*args, **kw):
+        return recursive_mkdir(func(*args, **kw))
+
+    return wrapper
+
+
+def decorate_all_functions(function_decorator):
+    def decorator(cls):
+        for name, obj in vars(cls).items():
+            if callable(obj) and name != "__init__":
+                try:
+                    obj = obj.__func__
+                except AttributeError:
+                    pass
+                setattr(cls, name, function_decorator(obj))
+        return cls
+
+    return decorator
+
+
+@decorate_all_functions(ensure_valid_path)
+class EvolufyPath(ConfigurableResource):
+    ROOT_DIR: str
 
     def cache(self, path=""):
         return os.path.join(self.ROOT_DIR, '.cache', path)

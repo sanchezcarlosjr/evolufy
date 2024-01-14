@@ -4,7 +4,7 @@ from dagster import (Definitions, ScheduleDefinition, define_asset_job, load_ass
                      AssetSelection, EnvVar)
 
 from evolufy.backtesting import ExperimentSetting
-from evolufy.data_sources import YahooFinanceResource, Filesystem
+from evolufy.data_sources import YahooFinanceResource, EvolufyPath
 # from . import assets
 from evolufy.io_managers import DataframeTableIOManager
 import evolufy
@@ -33,9 +33,9 @@ defs = Definitions(
         'io_manager': DataframeTableIOManager(schema="evolufy"),
         'yf': YahooFinanceResource(),
         'market_metrics': MarketMetrics(),
-        'filesystem': Filesystem(ROOT_DIR=EnvVar("ROOT_DIR")),
+        'filesystem': EvolufyPath(ROOT_DIR=EnvVar("ROOT_DIR")),
         'experiment_setting': ExperimentSetting(),
-        "output_notebook_io_manager": ConfigurableLocalOutputNotebookIOManager(base_dir='./data/reports'),
+        "output_notebook_io_manager": ConfigurableLocalOutputNotebookIOManager(),
         'mem_io_manager':  fs_io_manager
     }
 )

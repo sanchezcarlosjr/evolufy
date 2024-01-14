@@ -15,7 +15,6 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import yfinance as yf
 import regex as re
-
 import seaborn as sns
 
 sns.set_context("poster")
@@ -23,38 +22,46 @@ sns.set(rc={"figure.figsize": (16, 9.)})
 sns.set_style("whitegrid")
 
 import pandas as pd
-
 pd.set_option("display.max_rows", 120)
 pd.set_option("display.max_columns", 120)
 
 logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 
-APP_DIR = re.sub(r"\/$", "", os.environ['ROOT_DIR'])
+ROOT_DIR = re.sub(r"\/$", "", os.environ['ROOT_DIR'])
 
 
 def app_path(path=""):
-    return os.path.join(APP_DIR, 'src/evolufy', path)
+    return os.path.join(ROOT_DIR, 'src/evolufy', path)
 
 
 def base_path(path=""):
-    return os.path.join(APP_DIR, path)
+    return os.path.join(ROOT_DIR, path)
 
 
 def data_path(path=""):
-    return os.path.join(APP_DIR, 'data', path)
+    return os.path.join(ROOT_DIR, 'data', path)
+
+
+def reports(path=""):
+    path = os.path.join(ROOT_DIR, 'data/reports', path)
+    try:
+        Path(os.path.dirname(path)).mkdir(parents=True, exist_ok=True)
+    except FileExistsError:
+        pass
+    return os.path.join(ROOT_DIR, 'data/reports', path)
 
 
 def processed_path(path=""):
-    return os.path.join(APP_DIR, 'data/processed', path)
+    return os.path.join(ROOT_DIR, 'data/processed', path)
 
 
 def external_path(path=""):
-    return os.path.join(APP_DIR, 'data/external', path)
+    return os.path.join(ROOT_DIR, 'data/external', path)
 
 
 def raw_path(path=""):
-    return os.path.join(APP_DIR, 'data/raw', path)
+    return os.path.join(ROOT_DIR, 'data/raw', path)
 
 
 def interim_path(path=""):
-    return os.path.join(APP_DIR, 'data/interim', path)
+    return os.path.join(ROOT_DIR, 'data/interim', path)

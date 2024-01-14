@@ -5,7 +5,7 @@ import pandas as pd
 from dagster import build_output_context, build_input_context
 from sqlalchemy import create_engine
 
-from evolufy.data_sources import yahoo_finance_api, YahooFinanceResource, Filesystem
+from evolufy.data_sources import yahoo_finance_api, YahooFinanceResource, EvolufyPath
 from evolufy.io_managers import DataframeTableIOManager
 from evolufy.transformation import DartsTimeSerieEvolufy, darts_time_serie, MarketMetrics
 import random
@@ -61,7 +61,7 @@ def test_stock_dataset_into_darts_object_transformation():
     dates = pd.date_range('1/1/2000', periods=n, freq='B')
     df = pd.DataFrame(np.random.randn(n, 4), index=dates, columns=['Symbol', 'Close', 'C', 'D'])
     df = df.assign(Symbol=[random.choice(['A', 'B']) for i in range(n)])
-    filesystem = Filesystem(ROOT_DIR=os.environ['ROOT_DIR'])
+    filesystem = EvolufyPath(ROOT_DIR=os.environ['ROOT_DIR'])
     darts_time_serie(MarketMetrics(metrics=['Close']), filesystem=filesystem, yahoo_finance_api=df)
     timeserie = DartsTimeSerieEvolufy.from_pickle(filesystem.interim_path('A.pkl')).pd_dataframe()
     assert (timeserie.columns == ['Close'])

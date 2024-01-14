@@ -9,7 +9,7 @@ from joblib import Parallel, delayed
 from joblib_progress import joblib_progress
 import exchange_calendars as xcals
 
-from evolufy.data_sources import Filesystem
+from evolufy.data_sources import EvolufyPath
 import subprocess
 
 
@@ -28,9 +28,7 @@ class MarketMetrics(ConfigurableResource):
 
 
 @asset(group_name="data_source_transformations", compute_kind="Transformations")
-def darts_time_serie(market_metrics: MarketMetrics, filesystem: Filesystem, yahoo_finance_api: pd.DataFrame):
-    filesystem.mkdir(filesystem.interim_path('darts'))
-
+def darts_time_serie(market_metrics: MarketMetrics, filesystem: EvolufyPath, yahoo_finance_api: pd.DataFrame):
     def save_file(symbol):
         (DartsTimeSerieEvolufy.from_dataframe(symbol=symbol,
                                               df=yahoo_finance_api[yahoo_finance_api['Symbol'] == symbol][
@@ -44,9 +42,7 @@ def darts_time_serie(market_metrics: MarketMetrics, filesystem: Filesystem, yaho
 
 
 @asset(group_name="data_source_transformations", compute_kind="Transformations")
-def zipline_bundler(market_metrics: MarketMetrics, filesystem: Filesystem, yahoo_finance_api: pd.DataFrame):
-    filesystem.mkdir(filesystem.interim_path('zipline/daily'))
-
+def zipline_bundler(market_metrics: MarketMetrics, filesystem: EvolufyPath, yahoo_finance_api: pd.DataFrame):
     def save_file(symbol):
         (DartsTimeSerieEvolufy
          .from_dataframe(symbol=symbol, df=yahoo_finance_api[yahoo_finance_api['Symbol'] == symbol])
