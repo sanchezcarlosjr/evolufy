@@ -60,7 +60,7 @@ tear_sheet_jupyter_notebook = define_dagstermill_asset(
 @asset(group_name="backtesting", io_manager_key='mem_io_manager', compute_kind="backtesting")
 def report(context: AssetExecutionContext, filesystem: Filesystem, full_tear_sheet: str):
     NOTEBOOK = filesystem.reports('full_tear_sheet.ipynb')
-    OUTPUT = filesystem.reports(f'experiment_{context.run_id}/full_tear_sheet.md')
+    OUTPUT = filesystem.reports(f'experiment_{context.run_id}/index.md')
     subprocess.run(f'jupyter nbconvert {NOTEBOOK} --TagRemovePreprocessor.enabled=True --TagRemovePreprocessor.remove_cell_tags remove_cell --TemplateExporter.exclude_input=True  --to markdown --output {OUTPUT}', shell=True)
     os.remove(NOTEBOOK)
     subprocess.run(f'git add . && dvc add data/data data/external data/external data/interim data/processed data/raw '
