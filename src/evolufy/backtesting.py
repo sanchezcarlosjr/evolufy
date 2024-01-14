@@ -19,10 +19,14 @@ class ExperimentSetting(ConfigurableResource):
     start: str = '2014'
     end: str = '2018'
     benchmark_returns: str = 'SP500'
+    benchmark_returns_symbol: str = 'SPY'
     capital_base: int = 100000
     bundle: str = 'quandl'
     data_frequency: str = 'daily'
     live_start_date: str = '2017-01-01'
+    round_trips: bool = True
+    hide_positions: bool = True
+    comment: str = ''
 
 
 @asset(group_name="backtesting", io_manager_key='mem_io_manager', compute_kind="backtesting",
@@ -53,7 +57,17 @@ def experiment_backtesting_1(context: AssetExecutionContext, experiment_setting:
     path = filesystem.processed_path(f'{context.run_id}/{context.asset_key.to_user_string()}.pkl')
     results.to_pickle(path)
 
-    return {'live_start_date': experiment_setting.live_start_date, 'id': context.run_id, 'experiment_path': path}
+    return {
+        'live_start_date': experiment_setting.live_start_date,
+        'id': context.run_id,
+        'experiment_path': path,
+        'comment': experiment_setting.comment,
+        'start': experiment_setting.start,
+        'end': experiment_setting.end,
+        'benchmark_returns_symbol': experiment_setting.benchmark_returns_symbol,
+        'round_trips': experiment_setting.round_trips,
+        'hide_positions': experiment_setting.hide_positions
+    }
 
 
 tear_sheet_jupyter_notebook = define_dagstermill_asset(name="full_tear_sheet",
@@ -89,5 +103,3 @@ def report(context: AssetExecutionContext, filesystem: EvolufyPath, full_tear_sh
         image_filename = filesystem.reports(f'experiment_{context.run_id}/{key}')
         with open(image_filename, 'wb') as file:
             file.write(resource)
-
-    # subprocess.run(f'git add . && dvc add data/data data/external data/external data/interim data/processed data/raw & git commit -m "new experiment with id {context.run_id}"')

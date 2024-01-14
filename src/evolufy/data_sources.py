@@ -65,7 +65,7 @@ class EvolufyPath(ConfigurableResource):
         return os.path.join(self.ROOT_DIR, 'src/evolufy', path)
 
     def reports(self, path=""):
-        return os.path.join(self.ROOT_DIR, 'data/reports', path)
+        return os.path.join(self.ROOT_DIR, 'reports', path)
 
     def __call__(self, path):
         return self.processed_path(path)

@@ -1,12 +1,20 @@
 # Full Tear Sheet
 
 
+#### Experiment b362a94e-537b-4409-af98-a239275a34ad
+Live testing was started at 2017-01-01.
+Our benchmark was SPY.
+
+
+
+
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;"><th>Start date</th><td colspan=4>2014-01-02</td></tr>
     <tr style="text-align: right;"><th>End date</th><td colspan=4>2017-12-29</td></tr>
-    <tr style="text-align: right;"><th>In-sample months</th><td colspan=4>24</td></tr>
-    <tr style="text-align: right;"><th>Out-of-sample months</th><td colspan=4>23</td></tr>
+    <tr style="text-align: right;"><th>In-sample months</th><td colspan=4>36</td></tr>
+    <tr style="text-align: right;"><th>Out-of-sample months</th><td colspan=4>11</td></tr>
     <tr style="text-align: right;">
       <th></th>
       <th>In-sample</th>
@@ -17,93 +25,105 @@
   <tbody>
     <tr>
       <th>Annual return</th>
-      <td>62.485%</td>
-      <td>114.381%</td>
+      <td>60.531%</td>
+      <td>193.675%</td>
       <td>86.612%</td>
     </tr>
     <tr>
       <th>Cumulative returns</th>
-      <td>164.013%</td>
-      <td>358.204%</td>
+      <td>313.688%</td>
+      <td>192.422%</td>
       <td>1109.716%</td>
     </tr>
     <tr>
       <th>Annual volatility</th>
-      <td>75.123%</td>
-      <td>112.086%</td>
+      <td>106.74%</td>
+      <td>46.777%</td>
       <td>95.366%</td>
     </tr>
     <tr>
       <th>Sharpe ratio</th>
-      <td>1.01</td>
-      <td>1.23</td>
+      <td>0.96</td>
+      <td>2.53</td>
       <td>1.12</td>
     </tr>
     <tr>
       <th>Calmar ratio</th>
-      <td>1.13</td>
-      <td>1.50</td>
+      <td>0.71</td>
+      <td>9.24</td>
       <td>1.02</td>
     </tr>
     <tr>
       <th>Stability</th>
-      <td>0.66</td>
-      <td>0.88</td>
+      <td>0.12</td>
+      <td>0.81</td>
       <td>0.52</td>
     </tr>
     <tr>
       <th>Max drawdown</th>
-      <td>-55.263%</td>
-      <td>-76.358%</td>
+      <td>-85.112%</td>
+      <td>-20.956%</td>
       <td>-85.112%</td>
     </tr>
     <tr>
       <th>Omega ratio</th>
-      <td>1.21</td>
-      <td>1.31</td>
+      <td>1.22</td>
+      <td>1.62</td>
       <td>1.26</td>
     </tr>
     <tr>
       <th>Sortino ratio</th>
-      <td>1.60</td>
-      <td>1.97</td>
+      <td>1.53</td>
+      <td>4.60</td>
       <td>1.79</td>
     </tr>
     <tr>
       <th>Skew</th>
-      <td>0.87</td>
-      <td>1.15</td>
+      <td>1.07</td>
+      <td>1.49</td>
       <td>1.17</td>
     </tr>
     <tr>
       <th>Kurtosis</th>
-      <td>7.74</td>
-      <td>13.83</td>
+      <td>12.24</td>
+      <td>10.85</td>
       <td>15.13</td>
     </tr>
     <tr>
       <th>Tail ratio</th>
       <td>1.13</td>
-      <td>1.17</td>
+      <td>1.19</td>
       <td>1.07</td>
     </tr>
     <tr>
       <th>Daily value at risk</th>
-      <td>-9.162%</td>
-      <td>-13.575%</td>
+      <td>-13.039%</td>
+      <td>-5.423%</td>
       <td>-11.591%</td>
     </tr>
     <tr>
       <th>Gross leverage</th>
-      <td>2.90</td>
-      <td>4.15</td>
+      <td>3.83</td>
+      <td>2.59</td>
       <td>3.52</td>
     </tr>
     <tr>
       <th>Daily turnover</th>
-      <td>1.406%</td>
-      <td>0.072%</td>
+      <td>0.963%</td>
+      <td>0.066%</td>
       <td>0.739%</td>
+    </tr>
+    <tr>
+      <th>Alpha</th>
+      <td>1.01</td>
+      <td>0.79</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <th>Beta</th>
+      <td>4.38</td>
+      <td>3.34</td>
+      <td>4.30</td>
     </tr>
   </tbody>
 </table>
@@ -206,84 +226,25 @@
 
 
 
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>Top 10 long positions of all time</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>sid</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>AAPL</th>
-      <td>1354.10%</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>Top 10 short positions of all time</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>sid</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-  </tbody>
-</table>
-
-
-
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th>Top 10 positions of all time</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>sid</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>AAPL</th>
-      <td>1354.10%</td>
-    </tr>
-  </tbody>
-</table>
-
-
-
     
-![png](./full_tear_sheet_2_5.png)
+![png](output_3_3.png)
     
 
 
 
     
-![png](full_tear_sheet_2_7.png)
+![png](output_3_4.png)
     
 
 
 
     
-![png](./full_tear_sheet_2_8.png
+![png](output_3_5.png)
     
 
 
 
     
-![png](full_tear_sheet_2_9.png)
+![png](output_3_6.png)
     
 
