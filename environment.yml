@@ -5,7 +5,7 @@ channels:
   - pytorch
   # - fastai
 dependencies:
-  - python==3.11
+  - python==3.10
   - pip
   # BASICS
   - numpy
@@ -19,11 +19,19 @@ dependencies:
   - matplotlib
   - ipympl  # interactive matplotlib plots
   - seaborn
-  # - altair
-  # - yellowbrick
+  ## - altair
+  ## - yellowbrick
+  # Finance
+  - yfinance
+  - pyfolio-reloaded
+  - zipline-reloaded
+  - exchange-calendars
+  - alphalens-reloaded
+  - empyrical-reloaded==0.5.9
   # ML, STATS & DEEP LEARNING
-  # - statsmodels
   - scikit-learn
+  - u8darts-all
+  # - statsmodels
   # - sktime
   # - tslearn
   # - xgboost
@@ -51,7 +59,6 @@ dependencies:
   # DEVELOPMENT ONLY PACKAGES (could also be kept in a separate environment file)
   - jupyterlab
   - jupyter
-  - dvc_s3
   - dvc
   - pytest
   - pytest-cov
@@ -61,3 +68,7 @@ dependencies:
   - nbstripout
   - sphinx
   - recommonmark
+
+variables:
+  ZIPLINE_ROOT: ~/playground/evolufy/data/
+  QUANDL_API_KEY: irrelevant

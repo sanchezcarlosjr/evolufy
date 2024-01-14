@@ -17,4 +17,4 @@ class MexicanIssuers(Issuers):
              'BBAJIOO.MX', 'FEMSAUBD.MX', 'GMBXF', 'GAPB.MX', 'TLEVISACPO.MX', 'PE&OLES.MX', 'ALSEA.MX', 'AC.MX',
              'ASURB.MX', 'LIVEPOLC-1.MX', 'GCC.MX', 'ORBIA.MX', 'PINFRA.MX', 'Q.MX', 'BOLSAA.MX', 'ALPEKA.MX',
              'GENTERA.MX', 'ORBIA.MX', 'KOFUBL.MX', 'AGUA.MX', 'SIMECB.MX', 'VESTA.MX', 'FRES.MX', 'VOLARA.MX',
-             'MSFT.MX', 'GOOGL.MX'])
+             'MSFT.MX', 'GOOGL.MX', '^MXX'])

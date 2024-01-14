@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import pandas as pd
 import yfinance
@@ -23,12 +24,18 @@ class YahooFinanceResource(ConfigurableResource):
 class Filesystem(ConfigurableResource):
     ROOT_DIR: str
 
+    def mkdir(self, path):
+        Path(path).mkdir(parents=True, exist_ok=True)
+        return self
+
     def cache(self, path=""):
         return os.path.join(self.ROOT_DIR, '.cache', path)
 
-
     def app_path(self, path=""):
         return os.path.join(self.ROOT_DIR, 'src/evolufy', path)
+
+    def reports(self, path=""):
+        return os.path.join(self.ROOT_DIR, 'data/reports', path)
 
     def __call__(self, path):
         return self.processed_path(path)
