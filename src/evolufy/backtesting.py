@@ -39,11 +39,16 @@ def experiment_backtesting_1(context: AssetExecutionContext, experiment_setting:
 
     def initialize(context):
         context.asset = symbol('AAPL')
-        context.shares = 10
+        context.shares = 100
+        context.i = 0
 
     def handle_data(context, data):
-        order(symbol('AAPL'), context.shares)
-        context.shares = -context.shares
+        context.i = context.i % 365
+        if context.i == 20:
+            order(symbol('AAPL'), context.shares)
+        if context.i == 364:
+            order(symbol('AAPL'), -context.shares)
+        context.i += 1
 
     start = pd.Timestamp(experiment_setting.start)
     end = pd.Timestamp(experiment_setting.end)
