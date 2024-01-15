@@ -215,32 +215,20 @@ These practices are not mandatory when working with Evolufy, but they can enhanc
 
 <!-- pyscaffold-notes -->
 
-# Alternatives
-Numer.ai: As a crowd-sourced hedge fund, Numer.ai does not typically offer self-hosting capabilities. It operates on a unique model where users submit predictive models to the platform.
+# Self-hosted open-source alternatives
+Quantopian: Quantopian indeed carved a significant niche in the quantitative finance world as one of the most prominent and utilized libraries for algorithmic trading. Despite the cessation of its services, Quantopian's legacy lives on, shaping the current landscape of algorithmic trading. In the post-Quantopian era, its open-source contributions, such as Zipline, Pyfolio, and qgrid, continue to be pivotal tools in the industry.
 
-QuantConnect: This platform is open-source and allows users to run their algorithms on their own infrastructure, providing an opportunity for self-hosting.
+QuantConnect: An open-source platform, QuantConnect distinguishes itself by allowing users to run their algorithms on their own infrastructure, offering self-hosting opportunities. Look at lean.io.
 
-AlgoTrader: AlgoTrader is designed for institutional and professional traders and offers a software solution that can be self-hosted.
+AlgoTrader: Tailored for institutional and professional traders, AlgoTrader provides a software solution that supports self-hosting.
 
-TradingView: Primarily a web-based platform for charting and analysis, TradingView does not offer a traditional self-hosting option.
+Backtrader: As an open-source Python framework, Backtrader is versatile, enabling users to run it on their own machine or server, thus facilitating self-hosting.
 
-Backtrader: Being an open-source Python framework, Backtrader can be run on the user's own machine or server, allowing for self-hosting.
+Catalyst: Being a Python library, Catalyst allows for local operation, enabling users to self-host their trading algorithms.
 
-Quantiacs: This platform primarily focuses on providing a marketplace for trading algorithms and does not typically offer self-hosting capabilities.
+QuantRocket: QuantRocket is a comprehensive platform designed for quantitative trading and research. 
 
-Empirica: As a white-label platform, Empirica might offer some level of customization and self-hosting, depending on the specific requirements and arrangements.
-
-Catalyst: As a Python library, Catalyst can be run locally, allowing users to self-host their trading algorithms.
-
-TradingSim: This is a virtual trading platform focused on simulation and practice, and does not typically offer self-hosting.
-
-Quantopian
-
-https://www.quantrocket.com/
-
-https://jesse.trade/
-
-https://www.lean.io/cli/
+Jesse.trade: Jesse.trade is an open-source trading framework, focused on simplicity and ease of use for developing and testing algorithmic trading strategies. 
 
 ## Note
 
