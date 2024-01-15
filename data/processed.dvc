@@ -1,7 +1,7 @@
 outs:
-- md5: 8ec4148a27c9faebee88f269d6a69680.dir
-  size: 2269328
-  nfiles: 4
+- md5: 361d0a3bcc73b5a4291fd36ae867e2e2.dir
+  size: 10716962
+  nfiles: 10
   hash: md5
   desc: The final, canonical data sets for modeling.
   path: processed
