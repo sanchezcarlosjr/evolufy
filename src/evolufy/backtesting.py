@@ -10,7 +10,7 @@ from dagstermill import define_dagstermill_asset
 import subprocess
 import os
 import nbformat
-from nbconvert import MarkdownExporter
+from nbconvert import MarkdownExporter, WebPDFExporter
 from nbconvert.preprocessors import TagRemovePreprocessor
 from traitlets.config import Config
 
@@ -39,10 +39,11 @@ def experiment_backtesting_1(context: AssetExecutionContext, experiment_setting:
 
     def initialize(context):
         context.asset = symbol('AAPL')
+        context.shares = 10
 
     def handle_data(context, data):
-        order(symbol('AAPL'), 10)
-        record(AAPL=data.current(symbol('AAPL'), "price"))
+        order(symbol('AAPL'), context.shares)
+        context.shares = -context.shares
 
     start = pd.Timestamp(experiment_setting.start)
     end = pd.Timestamp(experiment_setting.end)
@@ -50,12 +51,13 @@ def experiment_backtesting_1(context: AssetExecutionContext, experiment_setting:
     sp500 = web.DataReader(experiment_setting.benchmark_returns, 'fred', start, end).SP500
     benchmark_returns = sp500.pct_change()
 
-    results = run_algorithm(start=start, end=end, initialize=initialize, handle_data=handle_data,
-                            capital_base=experiment_setting.capital_base, benchmark_returns=benchmark_returns,
-                            bundle=experiment_setting.bundle, data_frequency=experiment_setting.data_frequency)
+    perfomance = run_algorithm(start=start, end=end, initialize=initialize, handle_data=handle_data,
+                               capital_base=experiment_setting.capital_base, benchmark_returns=benchmark_returns,
+                               bundle=experiment_setting.bundle, data_frequency=experiment_setting.data_frequency)
 
     path = filesystem.processed_path(f'{context.run_id}/{context.asset_key.to_user_string()}.pkl')
-    results.to_pickle(path)
+    perfomance.to_pickle(path)
+    perfomance.to_markdown(filesystem.processed_path(f'{context.run_id}/{context.asset_key.to_user_string()}.md'))
 
     return {
         'live_start_date': experiment_setting.live_start_date,
@@ -66,37 +68,44 @@ def experiment_backtesting_1(context: AssetExecutionContext, experiment_setting:
         'end': experiment_setting.end,
         'benchmark_returns_symbol': experiment_setting.benchmark_returns_symbol,
         'round_trips': experiment_setting.round_trips,
-        'hide_positions': experiment_setting.hide_positions
+        'hide_positions': experiment_setting.hide_positions,
+        'resultant_capital': perfomance.capital_used.sum()
     }
 
 
 tear_sheet_jupyter_notebook = define_dagstermill_asset(name="full_tear_sheet",
-    notebook_path=file_relative_path(__file__, "../../notebooks/1.0-cest-full-tear-sheet.ipynb"),
-    group_name="backtesting", ins={"experiment_setting": AssetIn('experiment_backtesting_1')})
+                                                       notebook_path=file_relative_path(__file__,
+                                                                                        "../../notebooks/1.0-cest-full-tear-sheet.ipynb"),
+                                                       group_name="backtesting",
+                                                       ins={"experiment_setting": AssetIn('experiment_backtesting_1')})
 
 
-@asset(group_name="backtesting", auto_materialize_policy=AutoMaterializePolicy.eager(), io_manager_key='mem_io_manager', compute_kind="📝 reporting")
+@asset(group_name="backtesting", auto_materialize_policy=AutoMaterializePolicy.eager(), io_manager_key='mem_io_manager',
+       compute_kind="📝 reporting")
 def report(context: AssetExecutionContext, filesystem: EvolufyPath, full_tear_sheet: bytes):
     notebook = nbformat.reads(full_tear_sheet.decode(), as_version=4)
 
-    tag_preprocessor = TagRemovePreprocessor()
-    tag_preprocessor.enabled = True
-    tag_preprocessor.remove_cell_tags = ('remove_cell', 'injected-teardown', 'injected-parameters')
-
     c = Config()
     c.MarkdownExporter.preprocessors = ['nbconvert.preprocessors.TagRemovePreprocessor']
+    c.WebPDFExporter.preprocessors = ['nbconvert.preprocessors.TagRemovePreprocessor']
     c.TagRemovePreprocessor.enabled = True
     c.TagRemovePreprocessor.remove_cell_tags = ('remove_cell', 'injected-teardown', 'injected-parameters')
     c.MarkdownExporter.exclude_input = True
+    c.WebPDFExporter.exclude_input = True
 
     md_exporter = MarkdownExporter(config=c)
-    md_exporter.register_preprocessor(tag_preprocessor, enabled=True)
+    pdf_exporter = WebPDFExporter(config=c)
+    md_exporter.register_preprocessor(TagRemovePreprocessor(config=c), enabled=True)
+    pdf_exporter.register_preprocessor(TagRemovePreprocessor(config=c), enabled=True)
+
+    body, _ = pdf_exporter.from_notebook_node(notebook)
+
+    with open(filesystem.reports(f'experiment_{context.run_id}/report.pdf'), 'wb') as file:
+        file.write(body)
 
     body, resources = md_exporter.from_notebook_node(notebook)
 
-    OUTPUT = filesystem.reports(f'experiment_{context.run_id}/README.md')
-
-    with open(OUTPUT, 'w') as file:
+    with open(filesystem.reports(f'experiment_{context.run_id}/README.md'), 'w') as file:
         file.write(body)
 
     for key, resource in resources['outputs'].items():
