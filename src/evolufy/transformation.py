@@ -18,7 +18,7 @@ class DartsTimeSerieEvolufy(TimeSeries):
         kwargs['freq'] = kwargs['freq'] if 'freq' in kwargs else 'B'
         kwargs['df'] = kwargs['df'].select_dtypes([np.number])
         return (missing_values.fill_missing_values(TimeSeries.from_dataframe(**kwargs), fill='auto',
-                                                   method='pchip').with_static_covariates(
+                                                   method='akima').with_static_covariates(
             pd.DataFrame(data={"weight": [0], "shares": [0], "Symbol": [symbol]})))
 
 
