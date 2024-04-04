@@ -11,6 +11,8 @@ from evolufy.transformation import DartsTimeSerieEvolufy, darts_time_serie, Mark
 import random
 from dotenv import load_dotenv
 
+from evolufy.valuation import valuate_with_capital_asset_pricing_model
+
 load_dotenv()
 
 
@@ -60,10 +62,24 @@ def test_stock_dataset_into_darts_object_transformation():
     n = 10
     dates = pd.date_range('1/1/2000', periods=n, freq='B')
     df = pd.DataFrame(np.random.randn(n, 4), index=dates, columns=['Symbol', 'Close', 'C', 'D'])
-    df = df.assign(Symbol=[random.choice(['A', 'B']) for i in range(n)])
+    symbol = [random.choice(['A', 'B']) for i in range(n)]
+    df = df.assign(Symbol=symbol)
     filesystem = EvolufyPath(ROOT_DIR=os.environ['ROOT_DIR'])
-    darts_time_serie(MarketMetrics(metrics=['Close']), filesystem=filesystem, yahoo_finance_api=df)
-    timeserie = DartsTimeSerieEvolufy.from_pickle(filesystem.interim_path('A.pkl')).pd_dataframe()
+    symbols = darts_time_serie(MarketMetrics(metrics=['Close']), filesystem=filesystem, yahoo_finance_api=df)
+    timeserie = DartsTimeSerieEvolufy.from_pickle(filesystem.interim_path(f'darts/{symbol}.pkl')).pd_dataframe()
     assert (timeserie.columns == ['Close'])
-    asset = df[df['Symbol'] == 'A']['Close']
+    asset = df[df['Symbol'] == symbol]['Close']
     assert (timeserie['Close'] == asset).all()
+    assert symbols[0] == filesystem.interim_path(f'darts/{symbol}.pkl')
+
+
+def test_training():
+    n = 10
+    dates = pd.date_range('1/1/2000', periods=n, freq='B')
+    df = pd.DataFrame(np.random.randn(n, 4), index=dates, columns=['Symbol', 'Close', 'C', 'D'])
+    symbol = 'A'
+    df = df.assign(Symbol=symbol)
+    filesystem = EvolufyPath(ROOT_DIR=os.environ['ROOT_DIR'])
+    symbols = darts_time_serie(MarketMetrics(metrics=['Close']), filesystem=filesystem, yahoo_finance_api=df)
+    x = valuate_with_capital_asset_pricing_model(symbols)
+    assert False

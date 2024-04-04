@@ -28,7 +28,7 @@ class MarketMetrics(ConfigurableResource):
 
 
 @asset(group_name="data_source_transformations", compute_kind="Transformations")
-def darts_time_serie(market_metrics: MarketMetrics, filesystem: EvolufyPath, yahoo_finance_api: pd.DataFrame):
+def darts_time_serie(market_metrics: MarketMetrics, filesystem: EvolufyPath, yahoo_finance_api: pd.DataFrame) -> List[str]:
     def save_file(symbol):
         (DartsTimeSerieEvolufy.from_dataframe(symbol=symbol,
                                               df=yahoo_finance_api[yahoo_finance_api['Symbol'] == symbol][
@@ -39,6 +39,8 @@ def darts_time_serie(market_metrics: MarketMetrics, filesystem: EvolufyPath, yah
     symbols = yahoo_finance_api['Symbol'].unique()
     with joblib_progress("Transforming files...", total=len(symbols)):
         Parallel(n_jobs=4, backend='threading')(delayed(save_file)(symbol) for symbol in symbols)
+
+    return [filesystem.interim_path(f'darts/{symbol}.pkl') for symbol in symbols]
 
 
 @asset(group_name="data_source_transformations", compute_kind="Transformations")
